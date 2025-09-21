@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hiro Petshop - Toko Online Hewan Peliharaan</title>
+    <meta name="description" content="Hiro Petshop adalah toko online yang menyediakan berbagai kebutuhan hewan peliharaan dengan sistem pembelian online yang mudah.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.6);
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-featured {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        nav h1::before {
+            content: '🐾';
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        main {
+            margin-top: 80px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        #home {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            opacity: 0.1;
+        }
+
+        #home .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            margin: 30px auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: floatAnimation 3s ease-in-out infinite;
+        }
+
+        @keyframes floatAnimation {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        #home h2 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease;
+        }
+
+        #home p {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #products {
+            background: #f8f9fa;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .product-card {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+
+        .product-card:hover::before {
+            animation: shine 0.6s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-card h3::before {
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: #667eea;
+        }
+
+        .product-card:nth-child(1) h3::before { content: '\f6d7'; } 
+        .product-card:nth-child(2) h3::before { content: '\f1b0'; } 
+        .product-card:nth-child(3) h3::before { content: '\f7a2'; } 
+        .product-card:nth-child(4) h3::before { content: '\f6d3'; } 
+        .product-card:nth-child(5) h3::before { content: '\f4ad'; } 
+
+        #about {
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .features-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        #contact {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info h3::before {
+            content: '📞';
+            font-size: 1.2rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .schedule-table {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .schedule-table h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .schedule-table h3::before {
+            content: '🕒';
+            font-size: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table td {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1.1rem;
+        }
+
+        table td:first-child {
+            font-weight: 600;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+
+        footer .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        footer h4 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer ul li {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin-bottom: 20px;
+            }
+
+            nav ul li a {
+                font-size: 1.2rem;
+                padding: 15px 30px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            #home h2 {
+                font-size: 2.5rem;
+            }
+
+            #home p {
+                font-size: 1.1rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            footer .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-image {
+                max-width: 400px;
+            }
+
+            .product-image {
+                height: 120px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            #home {
+                padding: 120px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            nav {
+                padding: 0 15px;
+            }
+
+            nav h1 {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            #home h2 {
+                font-size: 2rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .contact-info,
+            .schedule-table {
+                padding: 25px;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Hiro Petshop</h1>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="mobileMenu">
+                <li><a href="#home" onclick="closeMobileMenu()">Beranda</a></li>
+                <li><a href="#products" onclick="closeMobileMenu()">Produk</a></li>
+                <li><a href="#about" onclick="closeMobileMenu()">Tentang Kami</a></li>
+                <li><a href="#contact" onclick="closeMobileMenu()">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="container">
+                <h2>Selamat Datang di Hiro Petshop</h2>
+                <p>Toko online hewan peliharaan yang menyediakan kebutuhan untuk hewan kesayangan Anda</p>
+                <img src="gambar awal petshp.jpg" alt="Pet Shop with Various Animals - Welcome to Hiro Petshop" class="hero-image">
+                <p>Berbelanja mudah dari rumah dengan produk berkualitas untuk hewan peliharaan Anda.</p>
+                <br>
+                <a href="#products" class="btn btn-primary">Lihat Produk</a>
+                <a href="#contact" class="btn btn-secondary">Hubungi Kami</a>
+            </div>
+        </section>
+
+        <section id="products">
+            <div class="container">
+                <h2 class="section-title">Produk Kami</h2>
+                <p class="section-subtitle">Temukan berbagai produk berkualitas untuk kebutuhan hewan peliharaan kesayangan Anda</p>
+                
+                <div class="products-grid">
+                    <article class="card product-card">
+                        <img src="gambar untuk makanan hewan.webp" alt="Pet Food Collection - Various Brands" class="product-image">
+                        <h3>Makanan Hewan</h3>
+                        <p>Berbagai pilihan makanan berkualitas untuk kucing, anjing, burung, dan hewan peliharaan lainnya dari brand ternama seperti Nutro, IAMS, Crave, dan lainnya.</p>
+                    </article>
+
+                    <article class="card product-card">
+                        <img src="mainan hewan.jpg" alt="Pet Accessories" class="product-image">
+                        <h3>Aksesoris & Mainan</h3>
+                        <p>Koleksi lengkap aksesoris seperti kalung, tali, kandang, tempat makan, dan mainan edukatif untuk hewan peliharaan.</p>
+                    </article>
+
+                    <article class="card product-card">
+                        <img src="gamabar untuk produk perawatan hewan.jpg" alt="Pet Care Products" class="product-image">
+                        <h3>Produk Perawatan</h3>
+                        <p>Shampoo, vitamin, obat-obatan, dan produk kesehatan lainnya untuk menjaga kebersihan dan kesehatan hewan peliharaan.</p>
+                    </article>
+
+                    <article class="card product-card">
+                        <img src="gambar hewan.jpg" alt="Pets" class="product-image">
+                        <h3>Hewan Peliharaan</h3>
+                        <p>Kami juga menyediakan berbagai jenis hewan peliharaan yang sehat dan terawat dengan baik.</p>
+                    </article>
+
+                    <article class="card card-featured product-card">
+                        <h3>Cara Pemesanan</h3>
+                        <p>Hubungi kami melalui WhatsApp atau email untuk memesan produk. Kami akan membantu Anda memilih produk yang tepat untuk hewan peliharaan Anda.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">Tentang Hiro Petshop</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Hiro Petshop adalah toko online yang baru memulai usaha pada tahun 2025. Kami fokus menyediakan produk-produk kebutuhan hewan peliharaan dengan sistem pembelian online yang mudah.</p>
+                        
+                        <p>Sebagai toko online yang baru memulai, kami berkomitmen untuk memberikan produk berkualitas dan kemudahan berbelanja untuk para pemilik hewan peliharaan.</p>
+                    </div>
+                    
+                    <div class="features">
+                        <h3>Keunggulan Berbelanja di Hiro Petshop</h3>
+                        <ul class="features-list">
+                            <li>Berbelanja dari rumah dengan mudah</li>
+                            <li>Produk berkualitas untuk hewan peliharaan</li>
+                            <li>Harga terjangkau</li>
+                            <li>Pelayanan online yang responsif</li>
+                            <li>Pengiriman ke seluruh Indonesia</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">Hubungi Kami</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Kami siap membantu Anda menemukan produk terbaik untuk hewan peliharaan kesayangan</p>
+                
+                <div class="contact-content">
+                    <address class="contact-info">
+                        <h3>Informasi Kontak</h3>
+                        <p>
+                            <strong>WhatsApp:</strong> <a href="https://wa.me/6285750316170">+62 857-5031-6170</a><br><br>
+                            <strong>Email:</strong> <a href="mailto:info@hiropetshop.com">info@hiropetshop.com</a>
+                        </p>
+                    </address>
+
+                    <div class="schedule-table">
+                        <h3>Jam Operasional Online</h3>
+                        <table>
+                            <tr>
+                                <td>Senin - Jumat</td>
+                                <td>09:00 - 18:00 WIB</td>
+                            </tr>
+                            <tr>
+                                <td>Sabtu - Minggu</td>
+                                <td>09:00 - 17:00 WIB</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div>
+                <p>© 2025 Hiro Petshop. Dibuat dengan sepenuh hati untuk para pecinta hewan peliharaan.</p>
+            </div>
+            
+            <div>
+                <h4>Referensi Desain:</h4>
+                <ul>
+                    <li><a href="https://www.petsmart.com/" target="_blank" rel="noopener noreferrer">PetSmart - Pet Supplies, Pet Food & Pet Products</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.remove('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (!nav.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.offsetTop;
+                    const offsetPosition = elementPosition - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
