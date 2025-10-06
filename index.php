@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+
+$page = isset($_GET['page']) ? $_GET['page'] : 'home';
+$category = isset($_GET['category']) ? $_GET['category'] : '';
+$logged_in = isset($_SESSION['username']);
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -18,10 +26,13 @@
                 <i class="fas fa-bars"></i>
             </label>
             <ul class="nav-menu">
-                <li><a href="#home">Beranda</a></li>
-                <li><a href="#products">Produk</a></li>
-                <li><a href="#about">Tentang Kami</a></li>
-                <li><a href="#contact">Kontak</a></li>
+                <li><a href="index.php?page=home">Beranda</a></li>
+                <li><a href="index.php?page=products">Produk</a></li>
+                <li><a href="index.php?page=about">Tentang Kami</a></li>
+                <li><a href="index.php?page=contact">Kontak</a></li>
+                <li><a href="dashboard.php" style="background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 25px;">Dashboard</a></li>
+                <li><a href="login.php" style="background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 25px;">Login</a></li>
+ 
             </ul>
         </nav>
     </header>
@@ -31,11 +42,16 @@
             <div class="container">
                 <h2>Selamat Datang di Hiro Petshop</h2>
                 <p>Toko online hewan peliharaan yang menyediakan kebutuhan untuk hewan kesayangan Anda</p>
+                <?php if ($logged_in): ?>
+                    <p style="background: rgba(255,255,255,0.2); display: inline-block; padding: 10px 20px; border-radius: 10px; margin: 10px 0;">
+                        👋 Halo, <?php echo htmlspecialchars($_SESSION['username']); ?>!
+                    </p>
+                <?php endif; ?>
                 <img src="gambar awal petshp.jpg" alt="Pet Shop with Various Animals - Welcome to Hiro Petshop" class="hero-image">
                 <p>Berbelanja mudah dari rumah dengan produk berkualitas untuk hewan peliharaan Anda.</p>
                 <br>
-                <a href="#products" class="btn btn-primary">Lihat Produk</a>
-                <a href="#contact" class="btn btn-secondary">Hubungi Kami</a>
+                <a href="index.php?page=products" class="btn btn-primary">Lihat Produk</a>
+                <a href="index.php?page=contact" class="btn btn-secondary">Hubungi Kami</a>
             </div>
         </section>
 
@@ -44,29 +60,44 @@
                 <h2 class="section-title">Produk Kami</h2>
                 <p class="section-subtitle">Temukan berbagai produk berkualitas untuk kebutuhan hewan peliharaan kesayangan Anda</p>
                 
+                <?php if ($category): ?>
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <p style="color: #667eea; font-weight: 600;">
+                            Menampilkan kategori: <?php echo htmlspecialchars($category); ?>
+                        </p>
+                        <a href="index.php?page=products" style="color: #764ba2; text-decoration: none;">
+                            ← Lihat semua produk
+                        </a>
+                    </div>
+                <?php endif; ?>
+                
                 <div class="products-grid">
                     <article class="card product-card">
                         <img src="gambar untuk makanan hewan.webp" alt="Pet Food Collection - Various Brands" class="product-image">
                         <h3>Makanan Hewan</h3>
                         <p>Berbagai pilihan makanan berkualitas untuk kucing, anjing, burung, dan hewan peliharaan lainnya dari brand ternama seperti Nutro, IAMS, Crave, dan lainnya.</p>
+                        <a href="index.php?page=products&category=makanan" class="btn btn-primary" style="margin-top: 10px; display: inline-block;">Lihat Detail</a>
                     </article>
 
                     <article class="card product-card">
                         <img src="mainan hewan.jpg" alt="Pet Accessories" class="product-image">
                         <h3>Aksesoris & Mainan</h3>
                         <p>Koleksi lengkap aksesoris seperti kalung, tali, kandang, tempat makan, dan mainan edukatif untuk hewan peliharaan.</p>
+                        <a href="index.php?page=products&category=aksesoris" class="btn btn-primary" style="margin-top: 10px; display: inline-block;">Lihat Detail</a>
                     </article>
 
                     <article class="card product-card">
                         <img src="gamabar untuk produk perawatan hewan.jpg" alt="Pet Care Products" class="product-image">
                         <h3>Produk Perawatan</h3>
                         <p>Shampoo, vitamin, obat-obatan, dan produk kesehatan lainnya untuk menjaga kebersihan dan kesehatan hewan peliharaan.</p>
+                        <a href="index.php?page=products&category=perawatan" class="btn btn-primary" style="margin-top: 10px; display: inline-block;">Lihat Detail</a>
                     </article>
 
                     <article class="card product-card">
                         <img src="gambar hewan.jpg" alt="Pets" class="product-image">
                         <h3>Hewan Peliharaan</h3>
                         <p>Kami juga menyediakan berbagai jenis hewan peliharaan yang sehat dan terawat dengan baik.</p>
+                        <a href="index.php?page=products&category=hewan" class="btn btn-primary" style="margin-top: 10px; display: inline-block;">Lihat Detail</a>
                     </article>
 
                     <article class="card card-featured product-card">
@@ -137,6 +168,11 @@
         <div class="container">
             <div>
                 <p>© 2025 Hiro Petshop. Dibuat dengan sepenuh hati untuk para pecinta hewan peliharaan.</p>
+                <?php if ($logged_in): ?>
+                    <p style="margin-top: 10px; font-size: 0.9rem;">
+                        Logged in as: <strong><?php echo htmlspecialchars($_SESSION['username']); ?></strong>
+                    </p>
+                <?php endif; ?>
             </div>
             
             <div>
