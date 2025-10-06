@@ -10,7 +10,7 @@ body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f8f9fa;
+    background-color: #ffffff;
 }
 
 .container {
@@ -201,7 +201,7 @@ section {
     height: auto;
     margin: 30px auto;
     border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(40, 38, 38, 0.3);
     animation: floatAnimation 3s ease-in-out infinite;
 }
 
@@ -276,7 +276,7 @@ section {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(45deg, transparent, #fcfaff4d, transparent);
     transform: rotate(45deg);
     transition: all 0.6s;
     opacity: 0;
@@ -304,17 +304,32 @@ section {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 15px;
-    color: #333;
+    color: #667eea;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
 
+body.dark-mode #products {
+    background: #1e1e1e;
+}
+
+body.dark-mode .product-card {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+}
+
+body.dark-mode .product-card h3 {
+    color: #667eea; 
+}
+
+
 .product-card h3::before {
     font-size: 1.2rem;
     color: #667eea;
 }
+
 
 .product-card:nth-child(1) h3::before { content: '🍖'; }
 .product-card:nth-child(2) h3::before { content: '🎾'; }
@@ -628,4 +643,65 @@ html {
     .schedule-table {
         padding: 25px;
     }
+}
+body.dark-mode {
+    background-color: #121212;
+    color: #f5f5f5;
+}
+
+body.dark-mode header {
+    background: linear-gradient(135deg, #1f1f1f 0%, #2d2d2d 100%);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode nav h1::before {
+    content: '🌙';
+}
+
+body.dark-mode .nav-menu li a {
+    color: #ddd;
+}
+
+body.dark-mode .nav-menu li a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode #home {
+    background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
+    color: #ffffff;
+}
+
+body.dark-mode #about {
+    background: #1e1e1e;
+}
+
+body.dark-mode #products {
+    background: #121212;
+}
+
+body.dark-mode .product-card {
+    background: #1f1f1f;
+    border: 1px solid #333;
+}
+
+body.dark-mode .product-card h3 {
+    color: #a4b3ff;
+}
+
+body.dark-mode #contact {
+    background: linear-gradient(135deg, #2c2c2c 0%, #1e1e1e 100%);
+    color: #ffffff;
+}
+
+body.dark-mode footer {
+    background: #1a1a1a;
+    color: #ccc;
+}
+
+body.dark-mode footer a {
+    color: #aaa;
+}
+
+body.dark-mode footer a:hover {
+    color: #fff;
 }
