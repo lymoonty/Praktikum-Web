@@ -210,18 +210,6 @@ function setupDarkMode() {
         
         const icon = this.querySelector('i');
         icon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
-        
-        if (isDarkMode && !document.getElementById('dark-style')) {
-            const darkStyle = document.createElement('style');
-            darkStyle.id = 'dark-style';
-            darkStyle.textContent = `
-                body.dark-mode { background-color: #1a1a1a; color: #e0e0e0; }
-                body.dark-mode .card { background: #2d3748; color: #e0e0e0; }
-                body.dark-mode #products { background: #2d3748; }
-                body.dark-mode #about { background: #1a1a1a; }
-            `;
-            document.head.appendChild(darkStyle);
-        }
     });
 }
 
